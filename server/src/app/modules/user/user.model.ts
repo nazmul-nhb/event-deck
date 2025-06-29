@@ -9,6 +9,7 @@ const userSchema = new Schema<IUserDoc>(
 		name: {
 			type: String,
 			trim: true,
+			required: true,
 		},
 		email: {
 			type: String,

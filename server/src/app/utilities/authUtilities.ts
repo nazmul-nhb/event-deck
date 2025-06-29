@@ -1,11 +1,10 @@
 import { createHmac, randomBytes, scrypt, timingSafeEqual } from 'crypto';
+import { promisify } from 'util';
 import { ErrorWithStatus } from '../classes/ErrorWithStatus';
 import configs from '../configs';
 import { STATUS_CODES } from '../constants';
 
 // ! ========== PASSWORD UTILS ========== //
-
-import { promisify } from 'util';
 
 const scryptAsync = promisify(scrypt);
 
