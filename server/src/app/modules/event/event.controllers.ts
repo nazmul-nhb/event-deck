@@ -11,8 +11,8 @@ const createEvent = catchAsync(async (req, res) => {
 	sendResponse(res, 'Event', 'POST', event);
 });
 
-const getAllEvents = catchAsync(async (_req, res) => {
-	const events = await eventServices.getAllEventsFromDB();
+const getAllEvents = catchAsync(async (req, res) => {
+	const events = await eventServices.getAllEventsFromDB(req.query);
 
 	sendResponse(res, 'Event', 'GET', events);
 });

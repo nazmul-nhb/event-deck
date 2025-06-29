@@ -1,6 +1,6 @@
 {
 	"name": "event-deck-server",
-	"version": "1.0.1",
+	"version": "1.0.5",
 	"description": "Server for EventDeck",
 	"main": "dist/server.js",
 	"scripts": {

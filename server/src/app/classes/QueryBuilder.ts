@@ -1,5 +1,5 @@
 import { type FilterQuery, Model, type Query } from 'mongoose';
-import type { ExcludeField, NumericKeys, SearchField } from '../types';
+import type { ExcludeField, NumberKey, SearchField } from '../types';
 
 /**
  * @class QueryBuilder
@@ -62,6 +62,9 @@ export class QueryBuilder<T> {
 			'ids',
 			'exclude',
 			'select',
+			'to',
+			'from',
+			'fixed_date',
 		];
 
 		excludeFields.forEach((field) => delete queryObj[field]);
@@ -95,7 +98,7 @@ export class QueryBuilder<T> {
 	 * @param field The numeric field to filter by range (e.g., "price").
 	 * @returns The current instance of QueryBuilder.
 	 */
-	getRange(field: NumericKeys<T>) {
+	getRange(field: NumberKey<T>) {
 		const min = this?.query?.min ? Number(this?.query?.min) : undefined;
 		const max = this?.query?.max ? Number(this?.query?.max) : undefined;
 
