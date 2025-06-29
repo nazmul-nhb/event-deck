@@ -10,6 +10,6 @@ export default {
 		'development' | 'production'
 	>,
 	mongoUri: process.env.MONGO_URI as string,
-	saltRounds: Number(process.env.SALT_ROUNDS),
-	accessSecret: process.env.JWT_ACCESS_SECRET as string,
+	salt: process.env.SALT as string,
+	tokenSecret: process.env.TOKEN_SECRET as string,
 };

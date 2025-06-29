@@ -8,10 +8,8 @@ let server: Server;
 
 const bootStrap = async () => {
 	try {
-		// Connect to DB
 		await connectDB();
 
-		// Listen to the Server
 		server = app.listen(configs.port, () => {
 			console.info(
 				chalk.yellowBright(
