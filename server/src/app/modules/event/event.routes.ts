@@ -15,4 +15,10 @@ router.post(
 
 router.get('/', authorizeUser(), eventControllers.getAllEvents);
 
+router.patch('/:id', authorizeUser(), eventControllers.updateEvent);
+
+router.delete('/:id', authorizeUser(), eventControllers.deleteEvent);
+
+router.get('/user', authorizeUser(), eventControllers.getUserEvents);
+
 export const eventRoutes = router;

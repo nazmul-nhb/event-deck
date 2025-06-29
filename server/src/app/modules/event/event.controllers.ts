@@ -17,4 +17,32 @@ const getAllEvents = catchAsync(async (req, res) => {
 	sendResponse(res, 'Event', 'GET', events);
 });
 
-export const eventControllers = { getAllEvents, createEvent };
+const getUserEvents = catchAsync(async (req, res) => {
+	const events = await eventServices.getUserEventsFromDB(req?.user?.email);
+
+	sendResponse(res, 'Event', 'GET', events);
+});
+
+const updateEvent = catchAsync(async (req, res) => {
+	const event = await eventServices.updateEventInDB(
+		req.params.id,
+		req.body,
+		req?.user?.email,
+	);
+
+	sendResponse(res, 'Event', 'PATCH', event);
+});
+
+const deleteEvent = catchAsync(async (req, res) => {
+	await eventServices.deleteEventInDB(req.params.id, req?.user?.email);
+
+	sendResponse(res, 'Event', 'DELETE', null);
+});
+
+export const eventControllers = {
+	getAllEvents,
+	createEvent,
+	getUserEvents,
+	updateEvent,
+	deleteEvent,
+};
