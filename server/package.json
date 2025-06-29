@@ -1,0 +1,65 @@
+{
+  "name": "event-deck-server",
+  "version": "0.9.9",
+  "description": "Server for EventDeck",
+  "main": "dist/server.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "node scripts/build.mjs",
+    "dev": "nodemon",
+    "deploy": "node scripts/build.mjs && vercel --prod",
+    "start": "node dist/server.js",
+    "format": "prettier --write .",
+    "lint": "node scripts/lint.mjs",
+    "fix": "node scripts/fix.mjs",
+    "commit": "node scripts/commit.mjs",
+    "module": "node scripts/module.mjs",
+    "secret": "node scripts/secret.mjs"
+  },
+  "keywords": [
+    "server",
+    "event-deck",
+    "event",
+    "node",
+    "express",
+    "typescript"
+  ],
+  "author": {
+    "name": "Nazmul Hassan",
+    "email": "nazmulnhb@gmail.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.30.0",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.7",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/parser": "^8.35.0",
+    "clipboardy": "^4.0.0",
+    "eslint": "^9.30.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.1",
+    "execa": "^9.6.0",
+    "globals": "^16.2.0",
+    "globby": "^14.1.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "progress-estimator": "^0.3.1",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.35.0"
+  },
+  "dependencies": {
+    "chalk": "4.1.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1",
+    "nhb-toolbox": "^4.12.61",
+    "zod": "^3.25.67"
+  }
+}
