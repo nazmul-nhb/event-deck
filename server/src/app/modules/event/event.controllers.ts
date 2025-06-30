@@ -18,7 +18,10 @@ const getAllEvents = catchAsync(async (req, res) => {
 });
 
 const getUserEvents = catchAsync(async (req, res) => {
-	const events = await eventServices.getUserEventsFromDB(req?.user?.email);
+	const events = await eventServices.getUserEventsFromDB(
+		req?.user?.email,
+		req.query,
+	);
 
 	sendResponse(res, 'Event', 'GET', events);
 });

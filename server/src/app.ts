@@ -1,4 +1,3 @@
-import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import type { Application } from 'express';
 import express from 'express';
@@ -19,8 +18,6 @@ app.set('trust proxy', true);
 // * Respect CORS Policy
 app.use(cors(corsOptions));
 
-// * Use Cookie Parser
-app.use(cookieParser());
 // * Use JSON Parser
 app.use(express.json());
 // * Use custom logger

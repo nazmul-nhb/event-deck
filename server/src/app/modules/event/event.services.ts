@@ -1,10 +1,9 @@
-import { chronos, sanitizeData } from 'nhb-toolbox';
 import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
-import { QueryBuilder } from '../../classes/QueryBuilder';
 import { STATUS_CODES } from '../../constants';
 import { User } from '../user/user.model';
 import { Event } from './event.model';
-import type { IEvent, IPopulatedEvent } from './event.types';
+import type { IEvent, IEventQuery, IPopulatedEvent } from './event.types';
+import { buildEventQuery } from './event.utils';
 
 const createEventInDB = async (payload: IEvent, email: string | undefined) => {
 	const user = await User.validateUser(email);
@@ -16,59 +15,8 @@ const createEventInDB = async (payload: IEvent, email: string | undefined) => {
 	return newEvent;
 };
 
-const getAllEventsFromDB = async (query?: Record<string, unknown>) => {
-	const {
-		page = 1,
-		limit = 10,
-		to,
-		from,
-		fixed_date,
-	} = query as Partial<{
-		page: number | string;
-		limit: number | string;
-		fixed_date: string;
-		to: string;
-		from: string;
-	}>;
-
-	const parsedFrom = from ? new Date(from) : undefined;
-	const parsedTo = to ? new Date(to) : undefined;
-	const parsedFixed = fixed_date ? new Date(fixed_date) : undefined;
-
-	const hasFrom = Boolean(parsedFrom);
-	const hasTo = Boolean(parsedTo);
-	const hasFixed = Boolean(parsedFixed);
-
-	let gteDate: Date | undefined;
-	let lteDate: Date | undefined;
-
-	if (hasFrom) gteDate = parsedFrom;
-	if (hasTo) lteDate = parsedTo;
-
-	if (!hasFrom && !hasTo && hasFixed) {
-		gteDate = chronos(fixed_date!).startOf('day').toDate();
-		lteDate = chronos(fixed_date!).endOf('day').toDate();
-	}
-
-	const dateFilter =
-		gteDate || lteDate ?
-			{
-				event_date: {
-					...(gteDate && { $gte: gteDate }),
-					...(lteDate && { $lte: lteDate }),
-				},
-			}
-		:	{};
-
-	const eventQuery = new QueryBuilder(
-		Event.find(
-			sanitizeData(dateFilter, { ignoreFalsy: true, ignoreEmpty: true }),
-		),
-		query?.sort_by ? query : { ...query, sort_by: 'event_date' },
-	)
-		.search(['title'])
-		.filter()
-		.sort();
+const getAllEventsFromDB = async (query: IEventQuery) => {
+	const { eventQuery, limit, page } = buildEventQuery(query);
 
 	const total = await Event.countDocuments(eventQuery.modelQuery.getFilter());
 
@@ -86,14 +34,28 @@ const getAllEventsFromDB = async (query?: Record<string, unknown>) => {
 	};
 };
 
-const getUserEventsFromDB = async (email: string | undefined) => {
+const getUserEventsFromDB = async (
+	email: string | undefined,
+	query: IEventQuery,
+) => {
 	const user = await User.validateUser(email);
 
-	const userEvents = await Event.find({ created_by: user._id }).sort({
-		event_date: -1,
+	const { eventQuery, limit, page } = buildEventQuery(query, {
+		created_by: user._id,
 	});
 
-	return userEvents;
+	const total = await Event.countDocuments(eventQuery.modelQuery.getFilter());
+
+	eventQuery.paginate();
+
+	const events = await eventQuery.modelQuery;
+
+	return {
+		total,
+		current_page: page,
+		total_pages: Math.ceil(total / limit),
+		events,
+	};
 };
 
 const updateEventInDB = async (
