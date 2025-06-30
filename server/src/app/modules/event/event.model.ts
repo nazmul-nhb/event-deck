@@ -33,6 +33,12 @@ const eventSchema = new Schema<IEventDoc>(
 			ref: 'User',
 			required: true,
 		},
+		attendee: {
+			type: [Schema.ObjectId],
+			ref: 'User',
+			default: [],
+			required: false,
+		},
 	},
 	{
 		timestamps: {

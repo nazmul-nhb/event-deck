@@ -17,6 +17,12 @@ router.get('/', authorizeUser(), eventControllers.getAllEvents);
 
 router.patch('/:id', authorizeUser(), eventControllers.updateEvent);
 
+router.patch(
+	'/attendee-count/:id',
+	authorizeUser(),
+	eventControllers.incrementAttendeeCount,
+);
+
 router.delete('/:id', authorizeUser(), eventControllers.deleteEvent);
 
 router.get('/user', authorizeUser(), eventControllers.getUserEvents);

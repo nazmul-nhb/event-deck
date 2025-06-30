@@ -36,6 +36,15 @@ const updateEvent = catchAsync(async (req, res) => {
 	sendResponse(res, 'Event', 'PATCH', event);
 });
 
+const incrementAttendeeCount = catchAsync(async (req, res) => {
+	const event = await eventServices.incrementAttendeeCountInDB(
+		req.params.id,
+		req?.user?.email,
+	);
+
+	sendResponse(res, 'Event', 'PATCH', event, 'Successfully joined the event');
+});
+
 const deleteEvent = catchAsync(async (req, res) => {
 	await eventServices.deleteEventInDB(req.params.id, req?.user?.email);
 
@@ -48,4 +57,5 @@ export const eventControllers = {
 	getUserEvents,
 	updateEvent,
 	deleteEvent,
+	incrementAttendeeCount,
 };

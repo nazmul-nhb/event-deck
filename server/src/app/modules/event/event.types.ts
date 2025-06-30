@@ -14,6 +14,7 @@ export interface IEvent {
 
 export interface IEventDoc extends IEvent, Document {
 	_id: Types.ObjectId;
+	attendee: Array<Types.ObjectId>;
 	created_at: string;
 	updated_at: string;
 }

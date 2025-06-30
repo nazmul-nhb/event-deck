@@ -1,3 +1,4 @@
+import { deleteFields } from 'nhb-toolbox';
 import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
 import { STATUS_CODES } from '../../constants';
 import { User } from '../user/user.model';
@@ -87,7 +88,7 @@ const updateEventInDB = async (
 
 	const updateOptions = [
 		{ _id: id },
-		payload,
+		deleteFields(payload, ['attendee_count', 'created_by']),
 		{ new: true, rawResult: true },
 	];
 
@@ -140,10 +141,45 @@ const deleteEventInDB = async (id: string, email: string | undefined) => {
 	}
 };
 
+const incrementAttendeeCountInDB = async (
+	id: string,
+	email: string | undefined,
+) => {
+	const user = await User.validateUser(email);
+
+	const event = await Event.findOneAndUpdate(
+		{
+			_id: id,
+			attendee: { $ne: user._id },
+		},
+		[
+			{
+				$set: {
+					attendee: { $concatArrays: ['$attendee', [user._id]] },
+					attendee_count: { $add: ['$attendee_count', 1] },
+				},
+			},
+		],
+		{ new: true },
+	);
+
+	if (!event) {
+		throw new ErrorWithStatus(
+			'Not Found or Already Joined',
+			`Event not found or already joined the event!`,
+			STATUS_CODES.NOT_FOUND,
+			'join_event',
+		);
+	}
+
+	return event;
+};
+
 export const eventServices = {
 	getAllEventsFromDB,
 	createEventInDB,
 	getUserEventsFromDB,
 	updateEventInDB,
 	deleteEventInDB,
+	incrementAttendeeCountInDB,
 };
