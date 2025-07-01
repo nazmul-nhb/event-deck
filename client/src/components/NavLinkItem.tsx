@@ -1,5 +1,5 @@
-import type { FC, ReactNode } from "react";
-import { NavLink, type To } from "react-router";
+import type { FC, ReactNode } from 'react';
+import { NavLink, type To } from 'react-router';
 
 interface Props {
 	to: To;
@@ -7,15 +7,15 @@ interface Props {
 	className?: string;
 }
 
-const NavLinkItem: FC<Props> = ({ to, children, className = "" }) => {
+const NavLinkItem: FC<Props> = ({ to, children, className = '' }) => {
 	return (
 		<NavLink
 			to={to}
 			className={({ isActive }) =>
-				`relative group font-semibold text-nowrap whitespace-nowrap transition-all duration-300 ${className} ${
+				`relative group font-semibold text-nowrap whitespace-nowrap transition-all duration-300 select-none ${className} ${
 					isActive
-						? "text-red-600 hover:text-red-300 !font-bold"
-						: "dark:text-gray-200 hover:dark:text-red-300 text-gray-800 hover:text-red-300"
+						? 'text-red-600 hover:text-red-300 !font-bold cursor-not-allowed pointer-events-none'
+						: 'dark:text-gray-200 hover:dark:text-red-300 text-gray-800 hover:text-red-300'
 				}`
 			}
 		>

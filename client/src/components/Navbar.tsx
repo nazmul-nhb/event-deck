@@ -1,28 +1,102 @@
 import { navlinks } from '@/configs/navlinks';
-import { configs } from '../configs/site_configs';
-import { useAuth } from '../hooks/useAuth';
+import { configs } from '@/configs/site_configs';
+import { useAuth } from '@/hooks/useAuth';
 import NavLinkItem from './NavLinkItem';
 import { ToggleTheme } from './ToggleTheme';
+import { Calendar, LogOut } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Link, useNavigate } from 'react-router';
+import { useAppDispatch } from '@/app/hooks';
+import { logOut } from '../app/features/authSlice';
 
 const Navbar = () => {
 	const { user } = useAuth();
 
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+	const handleLogout = () => {
+		dispatch(logOut());
+		navigate('/');
+	};
+
 	return (
-		<nav className="flex items-center justify-between gap-2 px-3 sm:px-8 py-2">
-			<div className="flex items-center gap-2">
-				<h1 className="text-red-700 text-2xl sm:text-3xl font-bold">
-					{configs.site_title}
-				</h1>
-			</div>
-			<div className="flex items-center gap-3 text-">
-				{navlinks
-					.filter((link) => !link.private || (link.private && user))
-					.map(({ title, path }, index) => (
-						<NavLinkItem key={index} to={path}>
-							{title}
-						</NavLinkItem>
-					))}
-				<ToggleTheme />
+		<nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+			<div className="container mx-auto px-4">
+				<div className="flex h-16 items-center justify-between">
+					{/* Logo and Site Name */}
+					<Link to="/" className="flex items-center space-x-2">
+						<Calendar className="h-6 w-6 text-primary" />
+						<span className="text-xl font-bold">{configs.site_title}</span>
+					</Link>
+					<div className="hidden md:flex items-center space-x-6">
+						{navlinks
+							.filter((link) => !link.private || (link.private && user))
+							.map(({ title, path }, index) => (
+								<NavLinkItem key={index} to={path}>
+									{title}
+								</NavLinkItem>
+							))}
+						<ToggleTheme />
+					</div>
+
+					<div className="flex items-center space-x-4">
+						{user ? (
+							<DropdownMenu>
+								<DropdownMenuTrigger asChild>
+									<Button
+										variant="ghost"
+										className="relative h-8 w-8 rounded-full"
+									>
+										<Avatar className="h-8 w-8">
+											<AvatarImage
+												src={user.photo_url || '/placeholder.svg'}
+												alt={user.name}
+											/>
+											<AvatarFallback>
+												{user.name.charAt(0).toUpperCase()}
+											</AvatarFallback>
+										</Avatar>
+									</Button>
+								</DropdownMenuTrigger>
+								<DropdownMenuContent
+									className="w-56"
+									align="end"
+									forceMount
+								>
+									<DropdownMenuLabel className="font-normal">
+										<div className="flex flex-col space-y-1">
+											<p className="text-sm font-medium leading-none">
+												{user.name}
+											</p>
+											<p className="text-xs leading-none text-muted-foreground">
+												{user.email}
+											</p>
+										</div>
+									</DropdownMenuLabel>
+									<DropdownMenuSeparator />
+									<DropdownMenuItem onClick={handleLogout}>
+										<LogOut className="mr-2 h-4 w-4" />
+										<span>Log out</span>
+									</DropdownMenuItem>
+								</DropdownMenuContent>
+							</DropdownMenu>
+						) : (
+							<Button asChild>
+								<Link to="/login">Sign In</Link>
+							</Button>
+						)}
+					</div>
+				</div>
 			</div>
 		</nav>
 	);
