@@ -16,7 +16,7 @@ A full-stack event management system built with the MERN stack (MongoDB, Express
 
 ## Tech Stack
 
-**Frontend:**
+[Frontend/Client:](client/README.md)
 
 - Vite + TypeScript + React
 - Redux Toolkit for state management
@@ -24,7 +24,7 @@ A full-stack event management system built with the MERN stack (MongoDB, Express
 - Tailwind CSS for styling
 - Utilities from self-made package [nhb-toolbox](https://nhb-toolbox.vercel.app/)
 
-**Backend:**
+[Backend/Server:](server/README.md)
 
 - Node.js with Express.js
 - MongoDB with Mongoose ODM

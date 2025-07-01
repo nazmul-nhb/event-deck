@@ -40,7 +40,7 @@ TOKEN_SECRET=secret_for_token_generation_and_verification
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/login` - User login
 
-### User Endpoints
+### User Routes
 
 - `GET /api/users/profile` - Get profile for the logged in user
 
@@ -49,7 +49,7 @@ TOKEN_SECRET=secret_for_token_generation_and_verification
 - `GET /api/events` - Get all events
 - `POST /api/events` - Create new event
 - `GET /api/events/user` - Get user's events
-- `PUT /api/events/:id` - Update event
+- `PATCH /api/events/:id` - Update event
 - `DELETE /api/events/:id` - Delete event
 - `PATCH /api/events/join/:id` - Join an event
 
@@ -67,7 +67,7 @@ TOKEN_SECRET=secret_for_token_generation_and_verification
 
 ### Build
 
-- `npm run build` — Create a production build with progress bar
+- `npm run build` — Create a production build with custom-made progress bar
 - `npm run clean` — Remove the `dist` folder (`rimraf dist`)
 - `npm run deploy` — Build and deploy using Vercel (`scripts/build.mjs`)
 
