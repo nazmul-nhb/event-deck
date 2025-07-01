@@ -32,9 +32,7 @@ export default function EventsPage() {
 		isLoading,
 		error,
 	} = useGetAllEventsQuery({
-		search: searchTerm || undefined,
-		sort_by: 'created_at',
-		sort_order: 'desc',
+		search: searchTerm,
 	});
 
 	const filteredEvents = useMemo(() => {

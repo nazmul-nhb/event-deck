@@ -1,6 +1,11 @@
 import { baseApi } from '@/app/api/baseApi';
 import type { IQueryParams } from '@/types';
-import type { IEvent, IEventResponse, TEventData } from '@/types/event.types';
+import type {
+	IEvent,
+	IEventResponse,
+	IUserEventResponse,
+	TEventData,
+} from '@/types/event.types';
 import type { IServerResponse } from '@/types/server.types';
 import { generateQueryParams } from 'nhb-toolbox';
 
@@ -27,11 +32,18 @@ export const eventApi = baseApi.injectEndpoints({
 			providesTags: ['Events'],
 		}),
 
-		getUserEvents: builder.query<IServerResponse<IEvent>, void>({
-			query: () => ({
-				url: `events/user`,
-				method: 'GET',
-			}),
+		getUserEvents: builder.query<
+			IServerResponse<IUserEventResponse>,
+			IQueryParams<IEvent>
+		>({
+			query: (queryObject) => {
+				const queryParams = generateQueryParams(queryObject);
+
+				return {
+					url: `events/user`.concat(queryParams),
+					method: 'GET',
+				};
+			},
 			providesTags: ['Events'],
 		}),
 

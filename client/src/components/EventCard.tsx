@@ -14,9 +14,10 @@ interface Props {
 export default function EventCard({ event }: Props) {
 	const { user } = useAuth();
 
-	const [joinEvent] = useJoinEventMutation();
+	const [joinEvent, { isLoading, isSuccess }] = useJoinEventMutation();
 
-	const hasJoined = user && event.attendee.includes(user._id) ? true : false;
+	const hasJoined =
+		isSuccess || (user && event.attendee.includes(user._id) ? true : false);
 
 	return (
 		<Card className="h-full flex flex-col">
@@ -69,7 +70,7 @@ export default function EventCard({ event }: Props) {
 					className="w-full"
 					variant={hasJoined ? 'secondary' : 'default'}
 				>
-					{hasJoined ? 'Already Joined' : 'Join Event'}
+					{isLoading ? 'Joining...' : hasJoined ? 'Already Joined' : 'Join Event'}
 				</Button>
 			</CardContent>
 		</Card>

@@ -12,17 +12,15 @@ import { DateTimePicker } from '@/components/ui/date-time-picker';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { useAuth } from '@/hooks/useAuth';
 import { eventSchema } from '@/schema';
 import type { TEventData } from '@/types/event.types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CalendarIcon, FileText, MapPin, User } from 'lucide-react';
+import { CalendarIcon, FileText, MapPin } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
 export default function AddEventPage() {
 	const [createEvent, { isLoading, error }] = useCreateEventMutation();
-	const { user } = useAuth();
 	const navigate = useNavigate();
 
 	const {
@@ -35,12 +33,9 @@ export default function AddEventPage() {
 		resolver: zodResolver(eventSchema),
 	});
 
-	const onSubmit = async (data: TEventData) => {
+	const handleAddEvent = async (data: TEventData) => {
 		try {
-			const { success } = await createEvent({
-				...data,
-				event_date: new Date(data.event_date).toISOString(),
-			}).unwrap();
+			const { success } = await createEvent(data).unwrap();
 
 			if (success) {
 				reset();
@@ -72,7 +67,7 @@ export default function AddEventPage() {
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+					<form onSubmit={handleSubmit(handleAddEvent)} className="space-y-6">
 						{error && (
 							<Alert variant="destructive">
 								<AlertDescription>
@@ -155,7 +150,7 @@ export default function AddEventPage() {
 								</p>
 							)}
 						</div>
-
+						{/* 
 						<div className="flex flex-col md:flex-row justify-between">
 							<div className="space-y-2">
 								<Label
@@ -187,7 +182,7 @@ export default function AddEventPage() {
 									event
 								</p>
 							</div>
-						</div>
+						</div> */}
 
 						<div className="flex gap-4 pt-4">
 							<Button type="submit" disabled={isLoading} className="flex-1">

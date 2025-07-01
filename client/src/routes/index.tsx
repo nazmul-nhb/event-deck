@@ -6,6 +6,8 @@ import RegisterPage from '@/pages/RegisterPage';
 import { createBrowserRouter } from 'react-router';
 import AddEventPage from '../pages/AddEventPage';
 import EventsPage from '../pages/EventsPage';
+import Private from './Private';
+import MyEventsPage from '../pages/MyEventsPage';
 
 export const routes = createBrowserRouter([
 	{
@@ -27,11 +29,15 @@ export const routes = createBrowserRouter([
 			},
 			{
 				path: '/events',
-				element: <EventsPage />,
+				element: <Private children={<EventsPage />} />,
 			},
 			{
 				path: '/add-event',
-				element: <AddEventPage />,
+				element: <Private children={<AddEventPage />} />,
+			},
+			{
+				path: '/my-events',
+				element: <Private children={<MyEventsPage />} />,
 			},
 		],
 	},

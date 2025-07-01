@@ -19,3 +19,7 @@ export interface IEventResponse {
 	total_pages: number;
 	events: IEventDetails[];
 }
+
+export interface IUserEventResponse extends Omit<IEventResponse, 'events'> {
+	events: IEvent[];
+}
