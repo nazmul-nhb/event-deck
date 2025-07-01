@@ -6,10 +6,10 @@ import { Calendar, Plus } from 'lucide-react';
 import { isNotEmptyObject, isValidArray } from 'nhb-toolbox';
 import { Link } from 'react-router';
 import SkeletonGrid from '@/components/ui/skeleton-grid';
-import { useUseEventFilters } from '@/hooks/useEventFilters';
+import { useEventFilters } from '@/hooks/useEventFilters';
 
 export default function MyEventsPage() {
-	const { filterObject, EventFilters } = useUseEventFilters();
+	const { filterObject, EventFilters } = useEventFilters();
 
 	const { data, isLoading, isFetching, error } = useGetUserEventsQuery(filterObject);
 

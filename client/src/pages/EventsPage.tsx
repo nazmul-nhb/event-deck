@@ -4,10 +4,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Calendar } from 'lucide-react';
 import { isNotEmptyObject, isValidArray } from 'nhb-toolbox';
 import SkeletonGrid from '@/components/ui/skeleton-grid';
-import { useUseEventFilters } from '@/hooks/useEventFilters';
+import { useEventFilters } from '@/hooks/useEventFilters';
 
 export default function EventsPage() {
-	const { filterObject, EventFilters } = useUseEventFilters();
+	const { filterObject, EventFilters } = useEventFilters();
 
 	const { data, isLoading, isFetching, error } = useGetAllEventsQuery(filterObject);
 
