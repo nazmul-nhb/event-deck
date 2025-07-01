@@ -6,7 +6,7 @@ interface Props {
 
 export default function SkeletonGrid({ number = 9 }: Props) {
 	return (
-		<div className="container mx-auto px-4 py-8">
+		<div className="container mx-auto py-8">
 			<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 				{[...Array(number)].map((_, i) => (
 					<Card key={i} className="animate-pulse">

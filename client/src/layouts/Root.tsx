@@ -6,7 +6,7 @@ const Root = () => {
 	return (
 		<Fragment>
 			<Navbar />
-			<main className="mx-3 sm:mx-8">
+			<main>
 				<Outlet />
 			</main>
 		</Fragment>
