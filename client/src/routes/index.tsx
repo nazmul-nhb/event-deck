@@ -1,4 +1,5 @@
 import Root from '@/layouts/Root';
+import HomePage from '@/pages/HomePage';
 import LoginPage from '@/pages/LoginPage';
 import NotFound from '@/pages/NotFound';
 import RegisterPage from '@/pages/RegisterPage';
@@ -10,6 +11,10 @@ export const routes = createBrowserRouter([
 		element: <Root />,
 		errorElement: <NotFound />,
 		children: [
+			{
+				index: true,
+				element: <HomePage />,
+			},
 			{
 				path: '/login',
 				element: <LoginPage />,
