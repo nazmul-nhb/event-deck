@@ -12,7 +12,7 @@ export const navlinks: TNavLink[] = [
 	},
 	{
 		title: 'Add Event',
-		path: '/add-events',
+		path: '/add-event',
 		private: true,
 	},
 	{
