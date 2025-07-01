@@ -18,7 +18,7 @@ router.get('/', authorizeUser(), eventControllers.getAllEvents);
 router.patch('/:id', authorizeUser(), eventControllers.updateEvent);
 
 router.patch(
-	'/attendee-count/:id',
+	'/join/:id',
 	authorizeUser(),
 	eventControllers.incrementAttendeeCount,
 );

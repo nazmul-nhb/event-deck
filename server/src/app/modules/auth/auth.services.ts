@@ -2,7 +2,7 @@ import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
 import { STATUS_CODES } from '../../constants';
 import { createToken, verifyPassword } from '../../utilities/authUtilities';
 import { User } from '../user/user.model';
-import type { ILoginCredentials, IUser } from '../user/user.types';
+import type { ILoginCredentials, IUser, IUserDoc } from '../user/user.types';
 
 const registerUserInDB = async (payload: IUser) => {
 	const newUser = await User.create(payload);
@@ -31,7 +31,9 @@ const loginUser = async (payload: ILoginCredentials) => {
 
 	const token = createToken({ email: user.email });
 
-	return { token };
+	const { password: _, ...userDetails } = user.toObject<IUserDoc>();
+
+	return { token, user: userDetails };
 };
 
 export const authServices = { registerUserInDB, loginUser };
