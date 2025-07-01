@@ -1,36 +1,17 @@
 import { useGetUserEventsQuery } from '@/app/api/eventApi';
 import MyEventCard from '@/components/MyEventCard';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, Plus } from 'lucide-react';
-import { isValidArray } from 'nhb-toolbox';
+import { isNotEmptyObject, isValidArray } from 'nhb-toolbox';
 import { Link } from 'react-router';
+import SkeletonGrid from '@/components/ui/skeleton-grid';
+import { useUseEventFilters } from '@/hooks/useEventFilters';
 
 export default function MyEventsPage() {
-	const { data, isLoading, error } = useGetUserEventsQuery({});
+	const { filterObject, EventFilters } = useUseEventFilters();
 
-	if (isLoading) {
-		return (
-			<div className="container mx-auto px-4 py-8">
-				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-					{[...Array(3)].map((_, i) => (
-						<Card key={i} className="animate-pulse">
-							<CardHeader>
-								<div className="h-4 bg-muted rounded w-3/4"></div>
-								<div className="h-3 bg-muted rounded w-1/2"></div>
-							</CardHeader>
-							<CardContent>
-								<div className="space-y-2">
-									<div className="h-3 bg-muted rounded"></div>
-									<div className="h-3 bg-muted rounded w-5/6"></div>
-								</div>
-							</CardContent>
-						</Card>
-					))}
-				</div>
-			</div>
-		);
-	}
+	const { data, isLoading, isFetching, error } = useGetUserEventsQuery(filterObject);
 
 	if (error) {
 		return (
@@ -63,7 +44,12 @@ export default function MyEventsPage() {
 				</Button>
 			</div>
 
-			{isValidArray(data?.data?.events) ? (
+			{/* Search and Filter */}
+			<EventFilters />
+
+			{isLoading || isFetching ? (
+				<SkeletonGrid />
+			) : isValidArray(data?.data?.events) ? (
 				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 					{data?.data?.events?.map((event) => (
 						<MyEventCard key={event._id} event={event} />
@@ -76,8 +62,9 @@ export default function MyEventsPage() {
 							<Calendar className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
 							<h3 className="text-lg font-semibold mb-2">No events yet</h3>
 							<p className="text-muted-foreground mb-4">
-								You haven't created any events yet. Start by creating your
-								first event!
+								{isNotEmptyObject(filterObject)
+									? 'Try adjusting your search or filter criteria'
+									: "You haven't created any events yet. Start by creating your first event!"}
 							</p>
 							<Button asChild>
 								<Link to="/add-event">

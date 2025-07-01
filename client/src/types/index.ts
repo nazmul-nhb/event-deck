@@ -33,7 +33,9 @@ export interface IQueryParams<T extends GenericObject> extends QueryObject {
 	search?: string | number;
 	sort_by?: Extract<keyof T, string>;
 	sort_order?: 'asc' | 'desc';
-	filter?: string;
 	page?: number;
 	limit?: number;
+	to?: string;
+	from?: string;
+	fixed_date?: string;
 }
