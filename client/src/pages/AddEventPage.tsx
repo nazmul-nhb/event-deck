@@ -191,7 +191,7 @@ export default function AddEventPage() {
 							<Button
 								type="button"
 								variant="outline"
-								onClick={() => navigate('/events')}
+								onClick={() => navigate(-1)}
 								className="flex-1"
 							>
 								Cancel

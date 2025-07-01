@@ -14,13 +14,13 @@ const NavLinkItem: FC<Props> = ({ to, children, className = '' }) => {
 			className={({ isActive }) =>
 				`relative group font-semibold text-nowrap whitespace-nowrap transition-all duration-300 select-none ${className} ${
 					isActive
-						? 'text-red-600 hover:text-red-300 !font-bold cursor-not-allowed pointer-events-none'
+						? 'text-red-400 hover:text-red-300 !font-bold cursor-not-allowed pointer-events-none'
 						: 'dark:text-gray-200 hover:dark:text-red-300 text-gray-800 hover:text-red-300'
 				}`
 			}
 		>
 			{children}
-			<span className="absolute -bottom-1 left-0 w-full h-0.5 bg-red-600 transform origin-center scale-x-0 transition-all duration-500 ease-out group-hover:scale-x-100"></span>
+			<span className="absolute -bottom-1 left-0 w-full h-0.5 bg-red-400 transform origin-center scale-x-0 transition-all duration-500 ease-out group-hover:scale-x-100"></span>
 		</NavLink>
 	);
 };

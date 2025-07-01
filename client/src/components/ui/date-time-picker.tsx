@@ -10,6 +10,7 @@ import type { Any } from 'nhb-toolbox/types';
 
 interface DateTimePickerProps {
 	name: string;
+	defaultDate?: Date;
 	control?: Control<Any, Any, Any>;
 	defaultTime?: string;
 	errorMessage?: string;
@@ -19,12 +20,13 @@ interface DateTimePickerProps {
 export function DateTimePicker({
 	name,
 	control,
+	defaultDate,
 	defaultTime = '09:00',
 	errorMessage,
 	className = '',
 }: DateTimePickerProps) {
 	const [open, setOpen] = useState(false);
-	const [calendarDate, setCalendarDate] = useState<Date | undefined>();
+	const [calendarDate, setCalendarDate] = useState<Date | undefined>(defaultDate);
 	const [timeValue, setTimeValue] = useState(defaultTime);
 
 	return (

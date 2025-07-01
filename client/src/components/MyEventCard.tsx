@@ -1,27 +1,28 @@
-import { Edit, Trash2, MapPin, Users, Clock } from 'lucide-react';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
 import type { IEvent } from '@/types/event.types';
+import { Clock, MapPin, Trash2, Users } from 'lucide-react';
 import { chronos } from 'nhb-toolbox';
 import { useDeleteEventMutation } from '../app/api/eventApi';
+import UpdateEventModal from './UpdateEvent';
 
 interface Props {
 	event: IEvent;
@@ -66,10 +67,7 @@ export default function MyEventCard({ event }: Props) {
 				</CardDescription>
 
 				<div className="flex gap-2">
-					<Button variant="outline" size="sm" className="flex-1 bg-transparent">
-						<Edit className="mr-2 h-4 w-4" />
-						Update
-					</Button>
+					<UpdateEventModal event={event} />
 
 					<AlertDialog>
 						<AlertDialogTrigger asChild>
