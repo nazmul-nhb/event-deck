@@ -11,7 +11,7 @@ import { useEventFilters } from '@/hooks/useEventFilters';
 export default function MyEventsPage() {
 	const { filterObject, EventFilters } = useEventFilters();
 
-	const { data, isLoading, isFetching, error } = useGetUserEventsQuery(filterObject);
+	const { data, isLoading, error } = useGetUserEventsQuery(filterObject);
 
 	if (error) {
 		return (
@@ -47,7 +47,7 @@ export default function MyEventsPage() {
 			{/* Search and Filter */}
 			<EventFilters />
 
-			{isLoading || isFetching ? (
+			{isLoading ? (
 				<SkeletonGrid />
 			) : isValidArray(data?.data?.events) ? (
 				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
