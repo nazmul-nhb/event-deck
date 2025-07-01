@@ -5,14 +5,12 @@ import { configs } from '@/configs/site_configs';
 import {
 	CalendarIcon as CalendarCog,
 	Facebook,
-	Github,
 	Instagram,
 	Linkedin,
 	Mail,
 	MapPin,
 	Phone,
 	Send,
-	Twitter,
 } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router';
@@ -63,17 +61,15 @@ const Footer = () => {
 
 	const socialLinks = [
 		{ name: 'Facebook', icon: Facebook, href: 'https://facebook.com' },
-		{ name: 'Twitter', icon: Twitter, href: 'https://twitter.com' },
 		{ name: 'Instagram', icon: Instagram, href: 'https://instagram.com' },
 		{ name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com' },
-		{ name: 'GitHub', icon: Github, href: 'https://github.com' },
 	];
 
 	return (
 		<footer className="bg-background border-t">
 			<div className="container mx-auto px-4 py-12">
 				{/* Main Footer Content */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-7 gap-8 lg:gap-12">
 					{/* Company Info */}
 					<div className="lg:col-span-2">
 						<div className="flex items-center space-x-2 mb-4">
@@ -89,15 +85,25 @@ const Footer = () => {
 						<div className="space-y-3">
 							<div className="flex items-center space-x-3 text-sm text-muted-foreground">
 								<Mail className="h-4 w-4" />
-								<span>hello@eventmanager.com</span>
+								<a
+									href="mailto:nazmulnhb@gmail.com"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									nazmulnhb@gmail.com
+								</a>
 							</div>
 							<div className="flex items-center space-x-3 text-sm text-muted-foreground">
 								<Phone className="h-4 w-4" />
-								<span>+1 (555) 123-4567</span>
+								<a
+									href="tel:+8801623732187"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									+880 1623 732 187
+								</a>
 							</div>
 							<div className="flex items-center space-x-3 text-sm text-muted-foreground">
 								<MapPin className="h-4 w-4" />
-								<span>San Francisco, CA</span>
+								<span>Sirajganj, Bangladesh</span>
 							</div>
 						</div>
 					</div>
@@ -154,7 +160,7 @@ const Footer = () => {
 					</div>
 
 					{/* Newsletter Signup */}
-					<div>
+					<div className="lg:col-span-2">
 						<h3 className="font-semibold text-foreground mb-4">Stay Updated</h3>
 						<p className="text-sm text-muted-foreground mb-4">
 							Get the latest updates and event management tips.
