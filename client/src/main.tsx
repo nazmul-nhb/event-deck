@@ -1,11 +1,19 @@
+import { store } from '@/app/store/index.ts';
+import ThemeProvider from '@/providers/ThemeProvider';
+import { routes } from '@/routes';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
+import { Provider } from 'react-redux';
+import { RouterProvider } from 'react-router';
 
-import './styles.css';
+import '@/styles.css';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<App />
+		<Provider store={store}>
+			<ThemeProvider defaultTheme="dark">
+				<RouterProvider router={routes} />
+			</ThemeProvider>
+		</Provider>
 	</StrictMode>
 );

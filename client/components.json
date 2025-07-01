@@ -18,7 +18,11 @@
     "hooks": "@/hooks",
     "app": "@/app",
     "pages": "@/pages",
-    "layouts": "@/layouts"
+    "layouts": "@/layouts",
+    "routes": "@/routes",
+    "providers": "@/providers",
+    "types": "@/types",
+    "configs": "@/configs"
   },
   "iconLibrary": "lucide"
 }
