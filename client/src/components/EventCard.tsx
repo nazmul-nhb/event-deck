@@ -24,7 +24,9 @@ export default function EventCard({ event }: Props) {
 			<CardHeader>
 				<div className="flex items-start justify-between">
 					<div className="flex-1">
-						<CardTitle className="line-clamp-2 mb-2">{event.title}</CardTitle>
+						<CardTitle className="line-clamp-2 mb-2 pb-2">
+							{event.title}
+						</CardTitle>
 						<div className="flex items-center gap-2 mb-2">
 							<Avatar className="h-6 w-6">
 								<AvatarImage

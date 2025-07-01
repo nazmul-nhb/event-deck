@@ -1,22 +1,22 @@
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
 } from '@/components/ui/card';
 import type { IEvent } from '@/types/event.types';
 import { Clock, MapPin, Trash2, Users } from 'lucide-react';
@@ -36,7 +36,9 @@ export default function MyEventCard({ event }: Props) {
 			<CardHeader>
 				<div className="flex items-start justify-between">
 					<div className="flex-1">
-						<CardTitle className="line-clamp-2 mb-2">{event.title}</CardTitle>
+						<CardTitle className="line-clamp-2 mb-2 pb-2">
+							{event.title}
+						</CardTitle>
 						<Badge variant="secondary" className="mb-2">
 							Your Event
 						</Badge>
