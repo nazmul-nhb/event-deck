@@ -19,6 +19,7 @@ import { Edit } from 'lucide-react';
 import { chronos } from 'nhb-toolbox';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useValidateUpdate } from '../hooks/useValidateUpdate';
 
 interface Props {
 	event: IEvent;
@@ -43,10 +44,26 @@ export default function UpdateEventModal({ event }: Props) {
 		},
 	});
 
-	const onSubmit = async (data: Partial<TEventData>) => {
+	const { validateUpdate } = useValidateUpdate();
+
+	const handleUpdateEvent = async (data: Partial<TEventData>) => {
 		try {
-			await updateEvent({ id: event._id, data }).unwrap();
-			setOpen(false);
+			const updated = validateUpdate(
+				{
+					title: event.title,
+					location: event.location,
+					description: event.description,
+					event_date: event.event_date,
+				},
+				data
+			);
+
+			if (updated) {
+				const { success } = await updateEvent({ id: event._id, data }).unwrap();
+				if (success) {
+					setOpen(false);
+				}
+			}
 		} catch (error) {
 			console.error('Update failed:', error);
 		}
@@ -64,7 +81,7 @@ export default function UpdateEventModal({ event }: Props) {
 				<DialogHeader>
 					<DialogTitle>Update Event</DialogTitle>
 				</DialogHeader>
-				<form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pt-4">
+				<form onSubmit={handleSubmit(handleUpdateEvent)} className="space-y-6 pt-4">
 					<div className="space-y-2">
 						<Label htmlFor="title">Title</Label>
 						<Input

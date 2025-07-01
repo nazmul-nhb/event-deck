@@ -12,7 +12,7 @@ import {
 import { navlinks } from '@/configs/navlinks';
 import { configs } from '@/configs/site_configs';
 import { useAuth } from '@/hooks/useAuth';
-import { Calendar, LogOut } from 'lucide-react';
+import {  CalendarCog, LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
 import { logOut } from '../app/features/authSlice';
 import NavLinkItem from './NavLinkItem';
@@ -35,7 +35,7 @@ const Navbar = () => {
 				<div className="flex h-16 items-center justify-between">
 					{/* Logo and Site Name */}
 					<Link to="/" className="flex items-center space-x-2">
-						<Calendar className="h-6 w-6 text-primary" />
+						<CalendarCog className="h-6 w-6 text-primary" />
 						<span className="text-xl font-bold">{configs.site_title}</span>
 					</Link>
 					<div className="hidden md:flex items-center space-x-6">
