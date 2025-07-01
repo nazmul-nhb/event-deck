@@ -19,7 +19,7 @@ import NavLinkItem from './NavLinkItem';
 import { ToggleTheme } from './ToggleTheme';
 
 const Navbar = () => {
-	const { user } = useAuth();
+	const { user, isLoading } = useAuth();
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -50,7 +50,11 @@ const Navbar = () => {
 					</div>
 
 					<div className="flex items-center space-x-4">
-						{user ? (
+						{isLoading ? (
+							<Avatar className="h-8 w-8">
+								<AvatarFallback>ED</AvatarFallback>
+							</Avatar>
+						) : user ? (
 							<DropdownMenu>
 								<DropdownMenuTrigger asChild>
 									<Button
@@ -84,7 +88,10 @@ const Navbar = () => {
 										</div>
 									</DropdownMenuLabel>
 									<DropdownMenuSeparator />
-									<DropdownMenuItem onClick={handleLogout}>
+									<DropdownMenuItem
+										className="cursor-pointer"
+										onClick={handleLogout}
+									>
 										<LogOut className="mr-2 h-4 w-4" />
 										<span>Log out</span>
 									</DropdownMenuItem>
