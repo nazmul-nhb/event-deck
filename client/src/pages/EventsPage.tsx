@@ -5,11 +5,15 @@ import { Calendar } from 'lucide-react';
 import { isNotEmptyObject, isValidArray } from 'nhb-toolbox';
 import SkeletonGrid from '@/components/ui/skeleton-grid';
 import { useEventFilters } from '@/hooks/useEventFilters';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { configs } from '@/configs/site_configs';
 
 export default function EventsPage() {
 	const { filterObject, EventFilters } = useEventFilters();
 
 	const { data, isLoading, error } = useGetAllEventsQuery(filterObject);
+
+	useDocumentTitle(`Events - ${configs.site_title}`);
 
 	if (error) {
 		return (

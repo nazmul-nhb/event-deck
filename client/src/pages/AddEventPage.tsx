@@ -18,6 +18,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CalendarIcon, FileText, MapPin } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { configs } from '@/configs/site_configs';
 
 export default function AddEventPage() {
 	const [createEvent, { isLoading, error }] = useCreateEventMutation();
@@ -45,6 +47,8 @@ export default function AddEventPage() {
 			console.error('Failed to create event:', err);
 		}
 	};
+
+	useDocumentTitle(`Add Event - ${configs.site_title}`);
 
 	return (
 		<div className="container mx-auto px-4 py-8 max-w-2xl">
@@ -142,7 +146,11 @@ export default function AddEventPage() {
 								placeholder="Describe your event..."
 								rows={4}
 								{...register('description')}
-								className={errors.description ? 'border-red-500' : ''}
+								className={
+									errors.description
+										? 'border-red-500max-h-36'
+										: 'max-h-36'
+								}
 							/>
 							{errors.description && (
 								<p className="text-sm text-red-500">

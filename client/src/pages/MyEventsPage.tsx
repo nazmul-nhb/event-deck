@@ -7,11 +7,15 @@ import { isNotEmptyObject, isValidArray } from 'nhb-toolbox';
 import { Link } from 'react-router';
 import SkeletonGrid from '@/components/ui/skeleton-grid';
 import { useEventFilters } from '@/hooks/useEventFilters';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { configs } from '@/configs/site_configs';
 
 export default function MyEventsPage() {
 	const { filterObject, EventFilters } = useEventFilters();
 
 	const { data, isLoading, error } = useGetUserEventsQuery(filterObject);
+
+	useDocumentTitle(`My Events - ${configs.site_title}`);
 
 	if (error) {
 		return (

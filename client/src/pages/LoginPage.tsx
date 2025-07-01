@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { configs } from '@/configs/site_configs';
 import type { LocationState } from '@/types';
 import type { TCredentials } from '@/types/user.types';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,6 +18,8 @@ import { useToggle } from 'nhb-hooks';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { loginSchema } from '@/schema';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { configs } from '@/configs/site_configs';
 
 export default function LoginPage() {
 	const [showPassword, togglePassword] = useToggle([false, true]);
@@ -35,7 +36,7 @@ export default function LoginPage() {
 		resolver: zodResolver(loginSchema),
 	});
 
-	const onSubmit = async (data: TCredentials) => {
+	const handleLogin = async (data: TCredentials) => {
 		try {
 			const { success } = await loginUser(data).unwrap();
 			if (success) {
@@ -45,6 +46,8 @@ export default function LoginPage() {
 			console.error('Login failed:', err);
 		}
 	};
+
+	useDocumentTitle(`Login - ${configs.site_title}`);
 
 	return (
 		<div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -61,7 +64,7 @@ export default function LoginPage() {
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+					<form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
 						{error && (
 							<Alert variant="destructive">
 								<AlertDescription>

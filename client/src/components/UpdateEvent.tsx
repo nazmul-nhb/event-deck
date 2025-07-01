@@ -77,7 +77,7 @@ export default function UpdateEventModal({ event }: Props) {
 					Update
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-xl">
+			<DialogContent className="sm:max-w-xl max-h-[80vh]">
 				<DialogHeader>
 					<DialogTitle>Update Event</DialogTitle>
 				</DialogHeader>
@@ -125,7 +125,9 @@ export default function UpdateEventModal({ event }: Props) {
 							id="description"
 							{...register('description')}
 							rows={4}
-							className={errors.description ? 'border-red-500' : ''}
+							className={
+								errors.description ? 'border-red-500 max-h-36' : ' max-h-36'
+							}
 						/>
 						{errors.description && (
 							<p className="text-sm text-red-500">

@@ -10,28 +10,30 @@ import { configs } from '@/configs/site_configs';
 import { Calendar, MapPin, Plus, Users } from 'lucide-react';
 import { Link } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+
+const features = [
+	{
+		icon: Calendar,
+		title: 'Event Management',
+		description: 'Create, manage, and organize events with ease',
+	},
+	{
+		icon: Users,
+		title: 'Community Engagement',
+		description: 'Connect with attendees and build your community',
+	},
+	{
+		icon: MapPin,
+		title: 'Location Tracking',
+		description: 'Keep track of event locations and venues',
+	},
+];
 
 export default function HomePage() {
 	const { user } = useAuth();
 
-	const features = [
-		{
-			icon: Calendar,
-			title: 'Event Management',
-			description: 'Create, manage, and organize events with ease',
-		},
-		{
-			icon: Users,
-			title: 'Community Engagement',
-			description: 'Connect with attendees and build your community',
-		},
-		{
-			icon: MapPin,
-			title: 'Location Tracking',
-			description: 'Keep track of event locations and venues',
-		},
-	];
-
+	useDocumentTitle(`Home - ${configs.site_title}`);
 	return (
 		<div className="min-h-screen">
 			{/* Hero Section */}

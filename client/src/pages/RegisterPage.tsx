@@ -1,10 +1,6 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useRegisterUserMutation } from '@/app/api/authApi';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
 	Card,
 	CardContent,
@@ -12,12 +8,17 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useRegisterUserMutation } from '@/app/api/authApi';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { configs } from '@/configs/site_configs';
-import type { TRegisterUser } from '@/types/user.types';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import { registerSchema } from '@/schema';
+import type { TRegisterUser } from '@/types/user.types';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Calendar, Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router';
 
 export default function RegisterPage() {
 	const [showPassword, setShowPassword] = useState(false);
@@ -32,7 +33,7 @@ export default function RegisterPage() {
 		resolver: zodResolver(registerSchema),
 	});
 
-	const onSubmit = async (data: TRegisterUser) => {
+	const handleRegister = async (data: TRegisterUser) => {
 		try {
 			const { success } = await registerUser(data).unwrap();
 			if (success) {
@@ -42,6 +43,8 @@ export default function RegisterPage() {
 			console.error('Registration failed:', err);
 		}
 	};
+
+	useDocumentTitle(`Register - ${configs.site_title}`);
 
 	return (
 		<div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -58,7 +61,7 @@ export default function RegisterPage() {
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+					<form onSubmit={handleSubmit(handleRegister)} className="space-y-4">
 						{error && (
 							<Alert variant="destructive">
 								<AlertDescription>
