@@ -5,7 +5,7 @@ export const corsOptions: CorsOptions = {
 		const allowedOrigins = [
 			/^http:\/\/localhost:\d+$/,
 			/^http:\/\/192\.168\.8\.3:\d+$/,
-			'*',
+			'https://event-deck.vercel.app',
 		];
 
 		if (
