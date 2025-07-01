@@ -1,15 +1,11 @@
-import type { Prettify } from 'nhb-toolbox/utils/types';
 import type { DBItem } from '@/types';
+import type { Prettify } from 'nhb-toolbox/utils/types';
+import { z } from 'zod';
+import type { loginSchema, registerSchema } from '@/schema';
 
-export interface ICredentials {
-	email: string;
-	password: string;
-}
+export type TCredentials = z.infer<typeof loginSchema>;
 
-export interface IRegisterUser extends ICredentials {
-	name: string;
-	photo_url: string;
-}
+export type TRegisterUser = z.infer<typeof registerSchema>;
 
 export interface INewUser {
 	_id: string;

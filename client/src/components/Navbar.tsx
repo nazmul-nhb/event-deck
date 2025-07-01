@@ -1,9 +1,5 @@
-import { navlinks } from '@/configs/navlinks';
-import { configs } from '@/configs/site_configs';
-import { useAuth } from '@/hooks/useAuth';
-import NavLinkItem from './NavLinkItem';
-import { ToggleTheme } from './ToggleTheme';
-import { Calendar, LogOut } from 'lucide-react';
+import { useAppDispatch } from '@/app/hooks';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
 	DropdownMenu,
@@ -13,10 +9,14 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { navlinks } from '@/configs/navlinks';
+import { configs } from '@/configs/site_configs';
+import { useAuth } from '@/hooks/useAuth';
+import { Calendar, LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
-import { useAppDispatch } from '@/app/hooks';
 import { logOut } from '../app/features/authSlice';
+import NavLinkItem from './NavLinkItem';
+import { ToggleTheme } from './ToggleTheme';
 
 const Navbar = () => {
 	const { user } = useAuth();

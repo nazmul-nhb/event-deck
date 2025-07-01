@@ -8,12 +8,18 @@ importers:
 
   .:
     dependencies:
+      '@hookform/resolvers':
+        specifier: ^5.1.1
+        version: 5.1.1(react-hook-form@7.59.0(react@19.1.0))
       '@radix-ui/react-avatar':
         specifier: ^1.1.10
         version: 1.1.10(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@radix-ui/react-dropdown-menu':
         specifier: ^2.1.15
         version: 2.1.15(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@radix-ui/react-label':
+        specifier: ^2.1.7
+        version: 2.1.7(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@reduxjs/toolkit':
         specifier: ^2.8.2
         version: 2.8.2(react-redux@9.2.0(@types/react@19.1.8)(react@19.1.0)(redux@5.0.1))(react@19.1.0)
@@ -29,6 +35,9 @@ importers:
       lucide-react:
         specifier: ^0.525.0
         version: 0.525.0(react@19.1.0)
+      nhb-hooks:
+        specifier: ^1.11.2
+        version: 1.11.2(nhb-toolbox@4.12.61)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nhb-scripts:
         specifier: ^0.5.10
         version: 0.5.10
@@ -313,6 +322,11 @@ packages:
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
+  '@hookform/resolvers@5.1.1':
+    resolution: {integrity: sha512-J/NVING3LMAEvexJkyTLjruSm7aOFx7QX21pzkiJfMoNG0wl5aFEjLTl7ay7IQb9EWY6AkrBy7tHL2Alijpdcg==}
+    peerDependencies:
+      react-hook-form: ^7.55.0
+
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
@@ -498,6 +512,19 @@ packages:
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
+        optional: true
+
+  '@radix-ui/react-label@2.1.7':
+    resolution: {integrity: sha512-YT1GqPSL8kJn20djelMX7/cTRp/Y9w5IZHvfxQTVHrOqa2yMl7i/UfMqKRU5V7mEyKTrUVgJXhNQPVCG8PBLoQ==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
         optional: true
 
   '@radix-ui/react-menu@2.1.15':
@@ -1589,6 +1616,13 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
+  nhb-hooks@1.11.2:
+    resolution: {integrity: sha512-pHh8jm1uz6r/rX8IaEH51D9xI+Ed6IRaGJx/lKvIsrci4jRNmeqC7eADbx4eaRaopXGRsFBoS2xZFcGFJa9vlg==}
+    peerDependencies:
+      nhb-toolbox: '>=4.12.0'
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
+
   nhb-scripts@0.5.10:
     resolution: {integrity: sha512-lmghx0SVDS01/KvHwlF31dG6/T9qi0ygt2pYklIDZCFDQ3v6x6gRQyU3oHNhc/QJQyMvAYtPSjq8u4Q4/urkIQ==}
     hasBin: true
@@ -2174,6 +2208,11 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
+  '@hookform/resolvers@5.1.1(react-hook-form@7.59.0(react@19.1.0))':
+    dependencies:
+      '@standard-schema/utils': 0.3.0
+      react-hook-form: 7.59.0(react@19.1.0)
+
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.6':
@@ -2337,6 +2376,15 @@ snapshots:
       react: 19.1.0
     optionalDependencies:
       '@types/react': 19.1.8
+
+  '@radix-ui/react-label@2.1.7(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@radix-ui/react-primitive': 2.1.3(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+    optionalDependencies:
+      '@types/react': 19.1.8
+      '@types/react-dom': 19.1.6(@types/react@19.1.8)
 
   '@radix-ui/react-menu@2.1.15(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
@@ -3327,6 +3375,12 @@ snapshots:
   nanoid@3.3.11: {}
 
   natural-compare@1.4.0: {}
+
+  nhb-hooks@1.11.2(nhb-toolbox@4.12.61)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      nhb-toolbox: 4.12.61
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   nhb-scripts@0.5.10:
     dependencies:

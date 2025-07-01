@@ -1,19 +1,24 @@
-import type { ILoginResponse, IServerResponse } from '../../types/server.types';
-import type { ICredentials, INewUser, TSingleUser } from '../../types/user.types';
+import type { ILoginResponse, IServerResponse } from '@/types/server.types';
+import type {
+	INewUser,
+	TCredentials,
+	TSingleUser,
+	TRegisterUser,
+} from '@/types/user.types';
 import { setCurrentUser, setToken } from '../features/authSlice';
 import { baseApi } from './baseApi';
 
 export const authApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
-		registerUser: builder.mutation<IServerResponse<INewUser>, FormData>({
-			query: (formData) => ({
+		registerUser: builder.mutation<IServerResponse<INewUser>, TRegisterUser>({
+			query: (data) => ({
 				url: 'auth/register',
 				method: 'POST',
-				body: formData,
+				body: data,
 			}),
 		}),
 
-		loginUser: builder.mutation<IServerResponse<ILoginResponse>, ICredentials>({
+		loginUser: builder.mutation<IServerResponse<ILoginResponse>, TCredentials>({
 			query: (credentials) => ({
 				url: 'auth/login',
 				method: 'POST',

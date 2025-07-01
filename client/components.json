@@ -22,6 +22,7 @@
     "routes": "@/routes",
     "providers": "@/providers",
     "types": "@/types",
+    "schema": "@/schema",
     "configs": "@/configs"
   },
   "iconLibrary": "lucide"
